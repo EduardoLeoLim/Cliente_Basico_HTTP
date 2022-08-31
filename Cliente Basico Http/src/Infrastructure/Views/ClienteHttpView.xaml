@@ -5,8 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cliente_Basico_Http.Infrastructure.Views"
         mc:Ignorable="d"
-        Title="Cliente Básico Http" MinHeight="450" Height="450" MinWidth="800" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Cliente Básico Http"
+        MinHeight="450" Height="450" MinWidth="800" Width="800"
+        FontFamily="Consolas">
+    <DockPanel LastChildFill="True">
+        <Label DockPanel.Dock="Top" Content="Cliente Básico Http" FontSize="20" FontWeight="Bold" FontFamily="Consolas"
+               Margin="15" />
+        <Grid DockPanel.Dock="Top" Margin="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="150"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="Método Http:" FontSize="16" VerticalAlignment="Center"
+                   Margin="20,0,10,0" />
+            <ComboBox Grid.Row="0" x:Name="cbxMetodoHttp" Grid.Column="1" Width="150" VerticalAlignment="Center"
+                      Margin="5,0" />
+
+            <Label Grid.Row="0" Grid.Column="2" Content="URL" FontSize="16" VerticalAlignment="Center"
+                   Margin="20,0,10,0" />
+            <TextBox Grid.Row="0" Grid.Column="3" x:Name="txtUrl" FontSize="16" VerticalAlignment="Center"
+                     Margin="5,0,20,0" />
+
+            <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="25,0,0,0">
+                <Label Content="Formato de repuesta:" FontSize="16" />
+                <RadioButton x:Name="rdbRaw" Content="Texto (Raw)" FontSize="14" GroupName="formatoRespuesta"
+                             IsChecked="True" />
+                <RadioButton x:Name="rdbHtml" Content="Html" FontSize="14" GroupName="formatoRespuesta" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Margin="20,0">
+                <Label Content="Parámetros:" FontSize="16" />
+                <TextBox x:Name="txtParametros" Height="120" FontSize="15" TextWrapping="Wrap" AcceptsReturn="True"
+                         HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+            </StackPanel>
+            <Button Grid.Row="2" Grid.Column="0" Content="Hacer petición" FontSize="16" Margin="20,0"></Button>
+        </Grid>
+        <Border BorderThickness="1" BorderBrush="Black" Margin="35,10,35,35">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <Grid x:Name="gridRequestResult">
+
+                </Grid>
+            </ScrollViewer>
+        </Border>
+    </DockPanel>
 </Window>
