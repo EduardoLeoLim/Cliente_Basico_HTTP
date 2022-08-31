@@ -1,0 +1,9 @@
+﻿<Application x:Class="Cliente_Basico_Http.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Cliente_Basico_Http"
+             Startup="App_OnStartup">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
