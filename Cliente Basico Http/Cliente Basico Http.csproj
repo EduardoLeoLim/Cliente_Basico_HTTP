@@ -8,9 +8,4 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="src\Application" />
-    <Folder Include="src\Domain" />
-  </ItemGroup>
-
 </Project>
