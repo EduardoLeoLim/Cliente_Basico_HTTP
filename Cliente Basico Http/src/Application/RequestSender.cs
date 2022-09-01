@@ -1,4 +1,5 @@
-﻿using Cliente_Basico_Http.Domain;
+﻿using System.Collections.Generic;
+using Cliente_Basico_Http.Domain;
 using Cliente_Basico_Http.Domain.Enums;
 using Cliente_Basico_Http.Domain.Model;
 using Cliente_Basico_Http.Domain.Services;
@@ -14,7 +15,7 @@ public class RequestSender
         _requestService = requestService;
     }
 
-    public ResponseData SendRequest(Methods method, string url, string parameters)
+    public ResponseData SendRequest(Methods method, string url, List<string> parameters)
     {
         Request request = new Request(method, url, parameters);
         return ResponseData.FromAggregate(_requestService.SendRequest(request));

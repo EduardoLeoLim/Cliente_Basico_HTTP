@@ -1,4 +1,6 @@
-﻿using Cliente_Basico_Http.Domain;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Cliente_Basico_Http.Domain;
 using Cliente_Basico_Http.Domain.Enums;
 using Cliente_Basico_Http.Domain.Services;
 
@@ -15,26 +17,31 @@ public class SendRequest
 
     ResponseData SendPostRequest(string url, string parameters)
     {
-        return new RequestSender(_requestService).SendRequest(Methods.Post, url, parameters);
+        List<string> parametersList = parameters.Split("\n").ToList();
+        return new RequestSender(_requestService).SendRequest(Methods.Post, url, parametersList);
     }
 
     ResponseData SendPuttRequest(string url, string parameters)
     {
-        return new RequestSender(_requestService).SendRequest(Methods.Put, url, parameters);
+        List<string> parametersList = parameters.Split("\n").ToList();
+        return new RequestSender(_requestService).SendRequest(Methods.Put, url, parametersList);
     }
 
     ResponseData SendPatchRequest(string url, string parameters)
     {
-        return new RequestSender(_requestService).SendRequest(Methods.Patch, url, parameters);
+        List<string> parametersList = parameters.Split("\n").ToList();
+        return new RequestSender(_requestService).SendRequest(Methods.Patch, url, parametersList);
     }
 
     ResponseData SendGetRequest(string url, string parameters)
     {
-        return new RequestSender(_requestService).SendRequest(Methods.Get, url, parameters);
+        List<string> parametersList = parameters.Split("\n").ToList();
+        return new RequestSender(_requestService).SendRequest(Methods.Get, url, parametersList);
     }
 
     ResponseData SendDeleteRequest(string url, string parameters)
     {
-        return new RequestSender(_requestService).SendRequest(Methods.Delete, url, parameters);
+        List<string> parametersList = parameters.Split("\n").ToList();
+        return new RequestSender(_requestService).SendRequest(Methods.Delete, url, parametersList);
     }
 }
