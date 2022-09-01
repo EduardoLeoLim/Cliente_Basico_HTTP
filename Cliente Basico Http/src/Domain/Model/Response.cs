@@ -6,6 +6,12 @@ public class Response
 {
     public int StatusCode { get; }
     public string MessageResponse { get; }
-    public List<string> Headers { get; }
     public string Body { get; }
+
+    public Response(int statusCode, string messageResponse, string body)
+    {
+        StatusCode = statusCode;
+        MessageResponse = messageResponse;
+        Body = body;
+    }
 }
