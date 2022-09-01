@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Cliente_Basico_Http.Domain;
+namespace Cliente_Basico_Http.Domain.Model;
 
-public class ResponseHttp
+public class Response
 {
     public int StatusCode { get; }
     public string MessageResponse { get; }
