@@ -47,7 +47,8 @@
                 <TextBox x:Name="txtParametros" Height="120" FontSize="15" TextWrapping="Wrap" AcceptsReturn="True"
                          HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
             </StackPanel>
-            <Button Grid.Row="2" Grid.Column="0" Content="Hacer petición" FontSize="16" Margin="20,0"></Button>
+            <Button x:Name="btnSendRequest" Grid.Row="2" Grid.Column="0" Content="Hacer petición" FontSize="16"
+                    Margin="20,0" Click="BtnSendRequest_OnClick" />
         </Grid>
         <Border BorderThickness="1" BorderBrush="Black" Margin="35,10,35,35">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
