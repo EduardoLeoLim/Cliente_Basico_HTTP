@@ -15,7 +15,7 @@ public class RequestSender
         _requestService = requestService;
     }
 
-    public async Task<ResponseData> SendRequest(Methods method, string url, List<string> parameters)
+    public async Task<ResponseData> SendRequest(Methods method, string url, Dictionary<string, string> parameters)
     {
         Request request = new Request(method, url, parameters);
         return ResponseData.FromAggregate( await _requestService.SendRequest(request));

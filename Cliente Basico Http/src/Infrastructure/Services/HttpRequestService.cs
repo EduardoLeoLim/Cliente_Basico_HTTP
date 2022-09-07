@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Cliente_Basico_Http.Domain.Enums;
 using Cliente_Basico_Http.Domain.Model;
 using Cliente_Basico_Http.Domain.Services;
+using Newtonsoft.Json;
 
 namespace Cliente_Basico_Http.Infrastructure.Services;
 
@@ -46,7 +48,9 @@ public class HttpRequestService : RequestService
 
     private async Task<Response> SendPostRequest(HttpClient client, Request request)
     {
-        var responseHttpCliente = await client.PostAsync(request.Url, null);
+        var jsonDictionary = JsonConvert.SerializeObject(request.Parameters);
+        var content = new StringContent(jsonDictionary, Encoding.UTF8, "application/json");
+        var responseHttpCliente = await client.PostAsync(request.Url, content);
         Response response = new Response(
             (int)responseHttpCliente.StatusCode,
             responseHttpCliente.RequestMessage.ToString(),
@@ -59,7 +63,9 @@ public class HttpRequestService : RequestService
 
     private async Task<Response> SendPutRequest(HttpClient client, Request request)
     {
-        var responseHttpCliente = await client.PutAsync(request.Url, null);
+        var jsonDictionary = JsonConvert.SerializeObject(request.Parameters);
+        var content = new StringContent(jsonDictionary, Encoding.UTF8, "application/json");
+        var responseHttpCliente = await client.PutAsync(request.Url, content);
         Response response = new Response(
             (int)responseHttpCliente.StatusCode,
             responseHttpCliente.RequestMessage.ToString(),
@@ -72,7 +78,9 @@ public class HttpRequestService : RequestService
 
     private async Task<Response> SendPatchRequest(HttpClient client, Request request)
     {
-        var responseHttpCliente = await client.PatchAsync(request.Url, null);
+        var jsonDictionary = JsonConvert.SerializeObject(request.Parameters);
+        var content = new StringContent(jsonDictionary , Encoding.UTF8, "application/json");
+        var responseHttpCliente = await client.PatchAsync(request.Url, content);
         Response response = new Response(
             (int)responseHttpCliente.StatusCode,
             responseHttpCliente.RequestMessage.ToString(),

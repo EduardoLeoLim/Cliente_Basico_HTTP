@@ -7,9 +7,9 @@ public class Request
 {
     public Methods Method { get; }
     public string Url { get; }
-    public List<string> Parameters { get; }
+    public Dictionary<string, string> Parameters { get; }
 
-    public Request(Methods method, string url, List<string> parameters)
+    public Request(Methods method, string url, Dictionary<string, string> parameters)
     {
         Method = method;
         Url = url;
