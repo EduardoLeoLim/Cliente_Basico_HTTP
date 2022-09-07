@@ -7,11 +7,14 @@ public class Response
     public int StatusCode { get; }
     public string MessageResponse { get; }
     public string Body { get; }
+    
+    public string ContentType { get; }
 
-    public Response(int statusCode, string messageResponse, string body)
+    public Response(int statusCode, string messageResponse, string contentType,string body)
     {
         StatusCode = statusCode;
         MessageResponse = messageResponse;
+        ContentType = contentType;
         Body = body;
     }
 }
