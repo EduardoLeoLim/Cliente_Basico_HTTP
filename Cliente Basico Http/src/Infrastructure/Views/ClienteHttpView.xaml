@@ -23,6 +23,7 @@
                 <RowDefinition Height="40" />
                 <RowDefinition Height="150"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Content="Método Http:" FontSize="16" VerticalAlignment="Center"
@@ -49,6 +50,7 @@
             </StackPanel>
             <Button x:Name="btnSendRequest" Grid.Row="2" Grid.Column="0" Content="Hacer petición" FontSize="16"
                     Margin="20,0" Click="BtnSendRequest_OnClick" />
+            <Label x:Name="lblResultados" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Margin="25,15,25,0" FontSize="18" />
         </Grid>
         <Border BorderThickness="1" BorderBrush="Black" Margin="35,10,35,35">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">

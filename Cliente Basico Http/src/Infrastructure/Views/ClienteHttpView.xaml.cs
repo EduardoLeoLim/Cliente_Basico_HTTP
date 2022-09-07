@@ -52,10 +52,14 @@ namespace Cliente_Basico_Http.Infrastructure.Views
                     responseData = await sender.SendDeleteRequest(txtUrl.Text, txtParametros.Text);
                     break;
             }
-            
+
             if (responseData == null)
+            {
+                lblResultados.Content = "Error al obtener respuesta";
                 return;
-            
+            }
+
+            lblResultados.Content = $"StatusCode:{responseData.StatusCode} - ContentType:{responseData.ContentType}";
             gridRequestResult.Children.Clear();
             if (rdbHtml.IsChecked == true && responseData.ContentType == "text/html")
             {
