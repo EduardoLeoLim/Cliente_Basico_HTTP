@@ -39,25 +39,38 @@ namespace Cliente_Basico_Http.Infrastructure.Views
                 case "GET":
                     responseData = await sender.SendGetRequest(txtUrl.Text, txtParametros.Text);
                     break;
+                case  "POST":
+                    responseData = await sender.SendPostRequest(txtUrl.Text, txtParametros.Text);
+                    break;
+                case "PUT":
+                    responseData = await sender.SendPutRequest(txtUrl.Text, txtParametros.Text);
+                    break;
+                case "PATCH":
+                    responseData = await sender.SendPatchRequest(txtUrl.Text, txtParametros.Text);
+                    break;
+                case "DELETE":
+                    responseData = await sender.SendDeleteRequest(txtUrl.Text, txtParametros.Text);
+                    break;
             }
             
             if (responseData == null)
                 return;
             
             gridRequestResult.Children.Clear();
-            if (rdbRaw.IsChecked == true)
+            if (rdbHtml.IsChecked == true && responseData.ContentType == "text/html")
+            {
+                var htmlResult = new WebBrowser();
+                htmlResult.NavigateToString(responseData.Body);
+                gridRequestResult.Children.Add(htmlResult);
+            }
+            else
             {
                 var textResult = new TextBlock();
                 textResult.Text = responseData.Body;
                 gridRequestResult.Children.Add(textResult);
             }
 
-            if (rdbHtml.IsChecked == true)
-            {
-                var htmlResult = new WebBrowser();
-                htmlResult.NavigateToString(responseData.Body);
-                gridRequestResult.Children.Add(htmlResult);
-            }
+            
         }
     }
 }
