@@ -18,26 +18,81 @@ public class HttpRequestService : RequestService
                 case Methods.Get:
                     return await SendGetRequest(client, request);
                 case Methods.Post:
-                    break;
+                    return await SendPostRequest(client, request);
                 case Methods.Put:
-                    break;
+                    return await SendPutRequest(client, request);
                 case Methods.Patch:
-                    break;
+                    return await SendPatchRequest(client, request);
                 case Methods.Delete:
-                    break;
+                    return await SendDeleteRequest(client, request);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
-
-        return null;
     }
 
-    private async Task<Response> SendGetRequest(HttpClient client , Request request)
+    private async Task<Response> SendGetRequest(HttpClient client, Request request)
     {
         var responseHttpCliente = await client.GetAsync(request.Url);
-        Response response = new Response((int)responseHttpCliente.StatusCode, responseHttpCliente.RequestMessage.ToString(), await responseHttpCliente.Content.ReadAsStringAsync());
-        
+        Response response = new Response(
+            (int)responseHttpCliente.StatusCode,
+            responseHttpCliente.RequestMessage.ToString(),
+            responseHttpCliente.Content.Headers.ContentType?.MediaType,
+            await responseHttpCliente.Content.ReadAsStringAsync()
+        );
+
+        return response;
+    }
+
+    private async Task<Response> SendPostRequest(HttpClient client, Request request)
+    {
+        var responseHttpCliente = await client.PostAsync(request.Url, null);
+        Response response = new Response(
+            (int)responseHttpCliente.StatusCode,
+            responseHttpCliente.RequestMessage.ToString(),
+            responseHttpCliente.Content.Headers.ContentType?.MediaType,
+            await responseHttpCliente.Content.ReadAsStringAsync()
+        );
+
+        return response;
+    }
+
+    private async Task<Response> SendPutRequest(HttpClient client, Request request)
+    {
+        var responseHttpCliente = await client.PutAsync(request.Url, null);
+        Response response = new Response(
+            (int)responseHttpCliente.StatusCode,
+            responseHttpCliente.RequestMessage.ToString(),
+            responseHttpCliente.Content.Headers.ContentType?.MediaType,
+            await responseHttpCliente.Content.ReadAsStringAsync()
+        );
+
+        return response;
+    }
+
+    private async Task<Response> SendPatchRequest(HttpClient client, Request request)
+    {
+        var responseHttpCliente = await client.PatchAsync(request.Url, null);
+        Response response = new Response(
+            (int)responseHttpCliente.StatusCode,
+            responseHttpCliente.RequestMessage.ToString(),
+            responseHttpCliente.Content.Headers.ContentType?.MediaType,
+            await responseHttpCliente.Content.ReadAsStringAsync()
+        );
+
+        return response;
+    }
+
+    private async Task<Response> SendDeleteRequest(HttpClient client, Request request)
+    {
+        var responseHttpCliente = await client.DeleteAsync(request.Url);
+        Response response = new Response(
+            (int)responseHttpCliente.StatusCode,
+            responseHttpCliente.RequestMessage.ToString(),
+            responseHttpCliente.Content.Headers.ContentType?.MediaType,
+            await responseHttpCliente.Content.ReadAsStringAsync()
+        );
+
         return response;
     }
 }
