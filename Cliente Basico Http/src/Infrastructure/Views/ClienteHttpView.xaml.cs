@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Cliente_Basico_Http.Application;
 using Cliente_Basico_Http.Infrastructure.Services;
+using Newtonsoft.Json;
 
 namespace Cliente_Basico_Http.Infrastructure.Views
 {
@@ -34,47 +35,54 @@ namespace Cliente_Basico_Http.Infrastructure.Views
         {
             var sender = new SendRequest(new HttpRequestService());
             ResponseData responseData = null;
-            switch ((string)cbxMetodoHttp.SelectedValue)
+            try
             {
-                case "GET":
-                    responseData = await sender.SendGetRequest(txtUrl.Text, txtParametros.Text);
-                    break;
-                case  "POST":
-                    responseData = await sender.SendPostRequest(txtUrl.Text, txtParametros.Text);
-                    break;
-                case "PUT":
-                    responseData = await sender.SendPutRequest(txtUrl.Text, txtParametros.Text);
-                    break;
-                case "PATCH":
-                    responseData = await sender.SendPatchRequest(txtUrl.Text, txtParametros.Text);
-                    break;
-                case "DELETE":
-                    responseData = await sender.SendDeleteRequest(txtUrl.Text, txtParametros.Text);
-                    break;
-            }
+                switch ((string)cbxMetodoHttp.SelectedValue)
+                {
+                    case "GET":
+                        responseData = await sender.SendGetRequest(txtUrl.Text);
+                        break;
+                    case "POST":
+                        responseData = await sender.SendPostRequest(txtUrl.Text, txtParametros.Text);
+                        break;
+                    case "PUT":
+                        responseData = await sender.SendPutRequest(txtUrl.Text, txtParametros.Text);
+                        break;
+                    case "PATCH":
+                        responseData = await sender.SendPatchRequest(txtUrl.Text, txtParametros.Text);
+                        break;
+                    case "DELETE":
+                        responseData = await sender.SendDeleteRequest(txtUrl.Text);
+                        break;
+                }
 
-            if (responseData == null)
-            {
-                lblResultados.Content = "Error al obtener respuesta";
-                return;
-            }
+                if (responseData == null)
+                {
+                    lblResultados.Content = "Error al obtener respuesta";
+                    return;
+                }
 
-            lblResultados.Content = $"StatusCode:{responseData.StatusCode} - ContentType:{responseData.ContentType}";
-            gridRequestResult.Children.Clear();
-            if (rdbHtml.IsChecked == true && responseData.ContentType == "text/html")
-            {
-                var htmlResult = new WebBrowser();
-                htmlResult.NavigateToString(responseData.Body);
-                gridRequestResult.Children.Add(htmlResult);
+                lblResultados.Content =
+                    $"StatusCode:{responseData.StatusCode} - ContentType:{responseData.ContentType}";
+                gridRequestResult.Children.Clear();
+                if (rdbHtml.IsChecked == true && responseData.ContentType == "text/html")
+                {
+                    var htmlResult = new WebBrowser();
+                    htmlResult.NavigateToString(responseData.Body);
+                    gridRequestResult.Children.Add(htmlResult);
+                }
+                else
+                {
+                    var textResult = new TextBlock();
+                    textResult.Text = responseData.Body;
+                    gridRequestResult.Children.Add(textResult);
+                }
             }
-            else
+            catch (JsonReaderException e)
             {
-                var textResult = new TextBlock();
-                textResult.Text = responseData.Body;
-                gridRequestResult.Children.Add(textResult);
+                lblResultados.Content = "El formato de los parámetros no es válido. Deben estar en formato JSON";
+                gridRequestResult.Children.Clear();
             }
-
-            
         }
     }
 }
