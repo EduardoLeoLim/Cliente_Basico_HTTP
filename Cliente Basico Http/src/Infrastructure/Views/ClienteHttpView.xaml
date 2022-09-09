@@ -44,13 +44,14 @@
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Margin="20,0">
-                <Label Content="Parámetros:" FontSize="16" />
+                <Label Content="Parámetros (JSON):" FontSize="16" />
                 <TextBox x:Name="txtParametros" Height="120" FontSize="15" TextWrapping="Wrap" AcceptsReturn="True"
-                         HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+                         AcceptsTab="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
             </StackPanel>
             <Button x:Name="btnSendRequest" Grid.Row="2" Grid.Column="0" Content="Hacer petición" FontSize="16"
                     Margin="20,0" Click="BtnSendRequest_OnClick" />
-            <Label x:Name="lblResultados" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Margin="25,15,25,0" FontSize="18" />
+            <Label x:Name="lblResultados" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Margin="25,15,25,0"
+                   FontSize="18" />
         </Grid>
         <Border BorderThickness="1" BorderBrush="Black" Margin="35,10,35,35">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
