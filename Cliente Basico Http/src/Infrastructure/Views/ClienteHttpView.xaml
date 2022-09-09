@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Cliente_Basico_Http.Infrastructure.Views"
         mc:Ignorable="d"
         Title="Cliente Básico Http"
-        MinHeight="450" Height="450" MinWidth="800" Width="800"
+        MinHeight="675" Height="675" MinWidth="800" Width="800"
         FontFamily="Consolas">
     <DockPanel LastChildFill="True">
         <Label DockPanel.Dock="Top" Content="Cliente Básico Http" FontSize="20" FontWeight="Bold" FontFamily="Consolas"
