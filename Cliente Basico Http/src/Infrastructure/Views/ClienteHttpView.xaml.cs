@@ -16,6 +16,7 @@ namespace Cliente_Basico_Http.Infrastructure.Views
         {
             InitializeComponent();
             cbxMetodoHttp.Items.Add("GET");
+            cbxMetodoHttp.Items.Add("HEAD");
             cbxMetodoHttp.Items.Add("POST");
             cbxMetodoHttp.Items.Add("PUT");
             cbxMetodoHttp.Items.Add("PATCH");
@@ -41,6 +42,9 @@ namespace Cliente_Basico_Http.Infrastructure.Views
                 {
                     case "GET":
                         responseData = await sender.SendGetRequest(txtUrl.Text);
+                        break;
+                    case "HEAD":
+                        responseData = await sender.SendHeadRequest(txtUrl.Text);
                         break;
                     case "POST":
                         responseData = await sender.SendPostRequest(txtUrl.Text, txtParametros.Text);

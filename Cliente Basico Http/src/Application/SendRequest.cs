@@ -40,6 +40,11 @@ public class SendRequest
         return await new RequestSender(_requestService).SendRequest(Methods.Get, url, "");
     }
 
+    public async Task<ResponseData> SendHeadRequest(string url)
+    {
+        return await new RequestSender(_requestService).SendRequest(Methods.Head, url, "");
+    }
+
     public async Task<ResponseData> SendDeleteRequest(string url)
     {
         return await new RequestSender(_requestService).SendRequest(Methods.Delete, url, "");

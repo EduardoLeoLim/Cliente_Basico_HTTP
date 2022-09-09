@@ -18,6 +18,8 @@ namespace Cliente_Basico_Http.Infrastructure.Services
                 {
                     case Methods.Get:
                         return await SendGetRequest(client, request);
+                    case Methods.Head:
+                        return await SendHeadRequest(client, request);
                     case Methods.Post:
                         return await SendPostRequest(client, request);
                     case Methods.Put:
@@ -35,6 +37,19 @@ namespace Cliente_Basico_Http.Infrastructure.Services
         private async Task<Response> SendGetRequest(HttpClient client, Request request)
         {
             var responseHttpCliente = await client.GetAsync(request.Url);
+            Response response = new Response(
+                (int)responseHttpCliente.StatusCode,
+                responseHttpCliente.RequestMessage.ToString(),
+                responseHttpCliente.Content.Headers.ContentType?.MediaType,
+                await responseHttpCliente.Content.ReadAsStringAsync()
+            );
+
+            return response;
+        }
+        
+        private async Task<Response> SendHeadRequest(HttpClient client, Request request)
+        {
+            var responseHttpCliente = await client.SendAsync(new HttpRequestMessage(HttpMethod.Head, request.Url));
             Response response = new Response(
                 (int)responseHttpCliente.StatusCode,
                 responseHttpCliente.RequestMessage.ToString(),

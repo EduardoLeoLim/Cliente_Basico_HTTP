@@ -3,6 +3,7 @@
 public enum Methods
 {
     Get,
+    Head,
     Post,
     Put,
     Patch,
