@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Cliente_Basico_Http.Domain;
+﻿using System.Threading.Tasks;
 using Cliente_Basico_Http.Domain.Enums;
 using Cliente_Basico_Http.Domain.Services;
+using Newtonsoft.Json.Linq;
 
 namespace Cliente_Basico_Http.Application;
 
@@ -19,44 +16,32 @@ public class SendRequest
 
     public async Task<ResponseData> SendPostRequest(string url, string parameters)
     {
-        List<string> parametersList = parameters.Split("\r\n").ToList();
-        var dictonary = ListToParamenter(parametersList);
-        return await new RequestSender(_requestService).SendRequest(Methods.Post, url, dictonary);
+        if (parameters.Length > 0)
+            _ = JToken.Parse(parameters);
+        return await new RequestSender(_requestService).SendRequest(Methods.Post, url, parameters);
     }
 
     public async Task<ResponseData> SendPutRequest(string url, string parameters)
     {
-        List<string> parametersList = parameters.Split("\r\n").ToList();
-        var dictonary = ListToParamenter(parametersList);
-        return await new RequestSender(_requestService).SendRequest(Methods.Put, url, dictonary);
+        if (parameters.Length > 0)
+            _ = JToken.Parse(parameters);
+        return await new RequestSender(_requestService).SendRequest(Methods.Put, url, parameters);
     }
 
     public async Task<ResponseData> SendPatchRequest(string url, string parameters)
     {
-        List<string> parametersList = parameters.Split("\r\n").ToList();
-        var dictonary = ListToParamenter(parametersList);
-        return await new RequestSender(_requestService).SendRequest(Methods.Patch, url, dictonary);
+        if (parameters.Length > 0)
+            _ = JToken.Parse(parameters);
+        return await new RequestSender(_requestService).SendRequest(Methods.Patch, url, parameters);
     }
 
-    public async Task<ResponseData> SendGetRequest(string url, string parameters)
+    public async Task<ResponseData> SendGetRequest(string url)
     {
-        List<string> parametersList = parameters.Split("\r\n").ToList();
-        var dictonary = ListToParamenter(parametersList);
-        return await new RequestSender(_requestService).SendRequest(Methods.Get, url, dictonary);
+        return await new RequestSender(_requestService).SendRequest(Methods.Get, url, "");
     }
 
-    public async Task<ResponseData> SendDeleteRequest(string url, string parameters)
+    public async Task<ResponseData> SendDeleteRequest(string url)
     {
-        List<string> parametersList = parameters.Split("\r\n").ToList();
-        var dictonary = ListToParamenter(parametersList);
-        return await new RequestSender(_requestService).SendRequest(Methods.Delete, url, dictonary);
-    }
-
-    private Dictionary<string, string> ListToParamenter(List<string> list)
-    {
-        Dictionary<string, object> paramenters;
-        Regex separator = new Regex(" +");
-        return list.Where(item => separator.Split(item).Length == 2)
-            .ToDictionary(itemKey => separator.Split(itemKey)[0], itemValue => separator.Split(itemValue)[1]);
+        return await new RequestSender(_requestService).SendRequest(Methods.Delete, url, "");
     }
 }
